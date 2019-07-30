@@ -5,29 +5,10 @@ import NavBar from './components/NavBar'
 import Landing from './components/Landing'
 import Login from './components/Login'
 import Register from './components/Register'
+import Profile from './components/Profile'
 
 class App extends Component {
-
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      isAuthenticate: false
-    }
-  }
-  /* this is user auth */
-  userHasAuthenticated = authenticated => {
-    this.setState({ isAuthenticated: authenticated });
-  }
-
-
   render() {
-    const childProps = {
-      isAuthenticated: this.state.isAuthenticated,
-      userHasAuthenticated: this.state.userHasAuthenticated
-    };
-    <Routes childProps={childProps} />
-
     return (
       <Router>
         <div className="App">
@@ -36,10 +17,11 @@ class App extends Component {
           <div className="container">
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/profile" component={Profile} />
           </div>
         </div>
       </Router>
-    );
+    )
   }
 }
 export default App;

@@ -26,7 +26,13 @@ class Navbar extends Component {
     const userLink = (
       <ul className="navbar-nav">
         <li className="nav-item">
-          <a href="#" onClick={this.logOut.bind(this)} className="nav-link">
+          <Link to="/profile" className="nav-link">
+            User
+          </Link>
+        </li>
+        <li className="nav-item">
+          <a // eslint-disable-next-line
+            href="http//:localhost" onClick={this.logOut.bind(this)} className="nav-link">
             Logout
           </a>
         </li>
@@ -35,7 +41,7 @@ class Navbar extends Component {
 
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark rounded">
-        <button className="naver-toggler"
+        <button className="navbar-toggler"
           type="button"
           data-toggle="collapse"
           data-target="#navbar1"
@@ -44,10 +50,11 @@ class Navbar extends Component {
           ari-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
+
         <div className="collapse navbar-collapse justify-content-md-center" id="navbar1">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <Link to="/login" className="nav-link">
+              <Link to="/" className="nav-link">
                 Home
               </Link>
             </li>

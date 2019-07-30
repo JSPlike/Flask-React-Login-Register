@@ -2,8 +2,8 @@ import axios from 'axios'
 
 export const register = newUser => {
   return axios
-    .post("users/register", {
-      name: newUser.name,
+    .post("http://127.0.0.1:5000/users/register", {
+      code: newUser.code,
       password: newUser.password
     })
     .then(response => {
@@ -13,8 +13,8 @@ export const register = newUser => {
 
 export const login = user => {
   return axios
-    .post("users/login", {
-      name: user.name,
+    .post("http://127.0.0.1:5000/users/login", {
+      code: user.code,
       password: user.password
     })
     .then(response => {

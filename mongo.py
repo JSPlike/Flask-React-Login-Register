@@ -7,7 +7,7 @@ from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from flask_jwt_extended import create_access_token
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path="")
 
 app.config['MONGO_DBNAME'] = 'user_db'
 app.config['MONGO_URI'] = 'mongodb://localhost:27017/user_db'
@@ -20,10 +20,11 @@ jwt = JWTManager(app)
 CORS(app)
 
 
-@app.route('/users/register', methods=['POST'])
+@app.route('/users/register', methods=['GET', 'POST'])
 def register():
     users = mongo.db.users
     code = request.get_json()['code']
+
     password = bcrypt.generate_password_hash(
         request.get_json()['password']).decode('utf-8')
     created = datetime.utcnow()
@@ -41,7 +42,7 @@ def register():
     return jsonify({'result': result})
 
 
-@app.route('/users/login', methods=['POST'])
+@app.route('/users/login', methods=['GET', 'POST'])
 def login():
     users = mongo.db.users
     code = request.get_json()['code']
@@ -53,13 +54,13 @@ def login():
     if response:
         if bcrypt.check_password_hash(response['password'], password):
             access_token = create_access_token(identity = {
-            'code': response['code']
+                'code': response['code']
             })
-            result = jsonify({"token":access_token})
+            result = jsonify({'token': access_token})
         else:
-            result = jsonify({"error": "Invlid username and password"})
+            result = jsonify({'error': "Invalid username and password"})
     else:
-        resut = jsonify({"result": "No results found"})
+        result = jsonify({'result': "No Results found"})
     return result
 
 
